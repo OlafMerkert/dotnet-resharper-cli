@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine
+FROM mcr.microsoft.com/dotnet/sdk:5.0
 
 # Install .NET Core 3.1
 RUN dotnet_version=3.1.9 \
-        && wget -O dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Runtime/$dotnet_version/dotnet-runtime-$dotnet_version-linux-musl-x64.tar.gz \
-        && dotnet_sha512='98778ec5ead5008b018e03defbe6eafe5d7a61e81689ae072dfff2135698e4bf4053d72a81851a25129d5969e3dca1258360961318db44adc3c94a7fd5cd2892' \
-        && echo "$dotnet_sha512  dotnet.tar.gz" | sha512sum -c - \
+        && curl -SL --output dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Runtime/$dotnet_version/dotnet-runtime-$dotnet_version-linux-x64.tar.gz \
+        && dotnet_sha512='dde97e3e95fe4109bcb6a16c23b709e8144a75ec46222e62541bd052c9db734008a8ccf3b2441b9438687bf9d2643f0155e795253c77a7d2eb6030bf1af3bba0' \
+        && echo "$dotnet_sha512 dotnet.tar.gz" | sha512sum -c - \
         && mkdir -p /usr/share/dotnet3 \
-        && tar -C /usr/share/dotnet3 -oxzf dotnet.tar.gz \
+        && tar -ozxf dotnet.tar.gz -C /usr/share/dotnet3 \
         && rm dotnet.tar.gz
 
 RUN dotnet_version=3.1.9 \
