@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim
 
 # Install .NET Core 3.1
 RUN dotnet_version=3.1.9 \
